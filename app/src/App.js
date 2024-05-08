@@ -40,11 +40,13 @@ function App() {
             <div>in caricamento...</div>
           :
             <>
-              {
-                alunni.map(a => (
-                  <Alunno alunno={a} gestisciClick={gestisciClick} key={a.id}/>
-                ))
-             }
+              <table>
+                {
+                  alunni.map(a => (
+                    <Alunno alunno={a} gestisciClick={gestisciClick} key={a.id}/>
+                  ))
+              }
+              </table>
             </>
           
         }

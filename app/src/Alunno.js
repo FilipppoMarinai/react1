@@ -4,6 +4,10 @@ export default function Alunno({alunno, gestisciClick}){
 
     const [inConferma, setInConferma] = useState(false);
     const [eliminazione, setEliminazione] = useState(false);
+    const [aggiorna, setAggiorna] = useState(false);
+    const [inAggiornamento, setInAggiornamento] = useState(false);
+    const [nome, setNome] = useState(alunno.nome);
+    const [cognome, setCognome] = useState(alunno.cognome);
 
     async function eliminaAlunno(){
         setEliminazione(true);
@@ -19,8 +23,30 @@ export default function Alunno({alunno, gestisciClick}){
         setInConferma(false);
     }
 
+    function aggiornamento(){
+        setInAggiornamento(true);
+    }
+
     return(
-        <div>Sono l'alunno {alunno.id} {alunno.nome} {alunno.cognome}
+        <tr>
+            <td>{alunno.id}</td>
+        
+            {inAggiornamento ?
+                <>
+                <td>{alunno.nome}</td>
+                <td>{alunno.cognome}</td>
+                </>
+                :
+                <>
+                <td>
+                    <input type='text' value={nome} onInput={(e) => setNome(e.target.value)}/>
+                    <input type='text' value={cognome} onInput={(e) => setCognome(e.target.value)}/>
+                </td>
+                <td>{alunno.cognome}</td>
+                </>
+            }
+
+            <td>
             {eliminazione ?
                 <span> - Eliminazione in corso...</span>
             :
@@ -37,7 +63,18 @@ export default function Alunno({alunno, gestisciClick}){
 
             )    
             }
-            <hr />
-        </div>
+            </td>
+            
+            <td>
+            {aggiorna ?
+                <span> - Aggiornamento in corso...</span>
+            :
+            <button onClick={aggiornamento}>
+                Aggiorna
+            </button>   
+            }
+            </td>
+
+        </tr>
     )
 }
